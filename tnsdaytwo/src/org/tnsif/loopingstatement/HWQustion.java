@@ -18,16 +18,18 @@ public class HWQustion {
 			System.out.println();
 		}
 		
-		System.out.print("\nEnter N : ");
+		
+		// number of digits
+		System.out.print("\nEnter N for number of digits : ");
 		N = sc.nextInt();
 		
 		int digit = 0;
 		int temp = N;
-		while(N != 0)
+		do
 		{
 			N /= 10;
 			digit++;
-		}
+		}while(N != 0);
 		System.out.println("Number of digits in "+ temp + " : " + digit);
 		sc.close();
 	}

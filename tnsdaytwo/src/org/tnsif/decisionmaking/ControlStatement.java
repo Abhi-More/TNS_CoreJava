@@ -5,6 +5,7 @@ public class ControlStatement {
 	public static void main(String[] args) 
 	{
 		Scanner sc = new Scanner(System.in);
+		 
 		
 		// if - else
 		System.out.print("Enter your age : ");
@@ -87,7 +88,6 @@ public class ControlStatement {
 		}
 		
 		sc.close();
-
 	}
 
 }
