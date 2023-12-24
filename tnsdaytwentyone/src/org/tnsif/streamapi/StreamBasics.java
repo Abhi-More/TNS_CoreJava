@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -22,8 +23,7 @@ public class StreamBasics {
 //			System.out.println(itr.next());
 //		}
 		
-		List<Integer> sqList = new ArrayList<>();
-		
+		List<Integer> sqList = new ArrayList<>();	
 		
 		for(Integer l : intList) {
 			sqList.add(l*l);
@@ -54,17 +54,18 @@ public class StreamBasics {
 		// filter - odd numbers
 		intList = Arrays.asList(1, 2, 3, 4, 5);
 		intStream = intList.stream();
-		Stream<Integer> result = intStream.filter(n -> n%2 != 0);
+		Stream<Integer> result = intStream.filter(n -> n % 2 != 0);
 		List rList = result.collect(Collectors.toList());
 		System.out.println(intList);
 		System.out.println(rList);
 		
-		// filter() - returns pallindrom
+		// filter() - returns palindrome
 		List words = Arrays.asList("CAT", "ABCCBA", "AAA", "DaD");
 		System.out.println(words);
 		Stream<String> wordStream = words.stream();
 		wordStream = wordStream.filter(w -> w.equals(new StringBuffer(w).reverse().toString()));
-		words = wordStream.collect(Collectors.toList());
+		wordStream.forEach(System.out::println);
+//		words = wordStream.collect(Collectors.toList());
 		System.out.println(words);
 		
 		// passing predicate
@@ -98,6 +99,36 @@ public class StreamBasics {
 		Optional<Integer> optList = intStream.reduce((x, y) -> x+x);
 		System.out.println(optList);
 		
+		Integer[] values = {10, 20, 30, 40};
+		Stream<Integer> stream = Arrays.stream(values);
+		stream.forEach(System.out::println);
 		
-	}
+		Stream<String> strStream = Stream.of("Nashik", "Pune", "Mumbai", "Thane");
+		strStream.forEach(System.out::println);
+		
+		Float[] f = {12.01f, 34.0f, 56.034f, 34.5f, 89.4f, 56.034f};
+		Stream<Float> floatStream = Arrays.stream(f);
+		
+		Consumer<Float> c = (n) -> System.out.println("Price is " + n);
+		floatStream.forEach(c);
+		
+		// limit
+		System.out.println("\n--------Limiting first 2");
+		floatStream = Arrays.stream(f);
+		floatStream.limit(2).forEach(c);
+		
+		// Skip
+		System.out.println("\n---------Skipping first 2");
+		floatStream = Arrays.stream(f);
+		floatStream.skip(2).forEach(c);
+		
+		// distinct
+		System.out.println("\n----------Distinct");
+		floatStream = Arrays.stream(f);
+		floatStream.distinct().forEach(c);
+		
+		strStream = Stream.of("Abhishek", "Disha", "Ashutosh", "Saish");
+		System.out.println("----Strings in Upper case");
+				
+ 	}
 }
